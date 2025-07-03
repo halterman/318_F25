@@ -4,7 +4,7 @@
 
 std::ostream& operator<<(std::ostream& os, std::vector<int> vec) {
     os << '{';
-    int n = vec.size();
+    size_t n = vec.size();
     if (n > 0) {
         os << vec[0];
         for (size_t i = 1; i < n; i++) {
