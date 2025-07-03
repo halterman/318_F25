@@ -21,7 +21,5 @@ int main() {
     std::cout << seq << '\n';
     std::cout << vecsum(seq) << '\n';
     std::cout << seq << '\n';
-
-    // std::vector<int> seq2 {};
-    // std::cout << seq2 << '\n';
+     
 }
