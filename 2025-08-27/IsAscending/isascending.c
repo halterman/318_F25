@@ -62,7 +62,6 @@ static double time_it(const int *a, int n, int (*f)(const int *, int)) {
     sw_reset(&timer);
     sw_start(&timer);
     count += f(a, n);
-    f(a, n);
     sw_stop(&timer);
     return sw_elapsed(&timer);
 }
