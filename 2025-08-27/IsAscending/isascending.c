@@ -15,9 +15,8 @@
 static int *make_array(int n, int max_element) {
     int *result = malloc(n * sizeof *result);
     assert(result != NULL);
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
         result[i] = randrange(0, max_element + 1);
-    }
     return result;
 }
 
@@ -63,6 +62,7 @@ static double time_it(const int *a, int n, int (*f)(const int *, int)) {
     sw_reset(&timer);
     sw_start(&timer);
     count += f(a, n);
+    f(a, n);
     sw_stop(&timer);
     return sw_elapsed(&timer);
 }
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
         printf("-----------------------------------------------------------\n");
         printf("Array Size     is_ascending1   is_ascending2        Speedup\n");
         printf("-----------------------------------------------------------\n");
-        for (int size = 10000; size < 200000; size += 10000) {
+        for (int size = 10000; size < 200001; size += 10000) {
             int *arr = malloc(size * sizeof *arr);
             assert(arr != NULL);
             for (int i = 0; i < size; i++)
