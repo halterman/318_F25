@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 typedef struct node {
     int data;
@@ -8,36 +9,36 @@ typedef struct node {
 
 // Inserts new element n onto the back of the list
 // to which p points. Uses recursion instead of iteration.
-struct node *insert(struct node *p, int n) {
-    //  Check that we are not at the end of the list
-    if (p)
-        p->next = insert(p->next, n); // Add to rest of list
-    else {   //  Insert new item
-        p = malloc(sizeof *p);
-        p->data = n;
-        p->next = NULL;
-    }
-    return p;
-}
-
-// Inserts new element n onto the back of the list
-// to which p points. Uses iteration instead of recursion.
 //Node *insert(Node *p, int n) {
-//    // Make the new node
-//    Node *nn = malloc(sizeof *nn);
-//    nn->data = n;
-//    nn->next = NULL;
-//    // Find the last element in the list
-//    struct node *cursor = p; 
-//    while (cursor && cursor->next) 
-//        cursor = cursor->next;
-//    if (cursor) {   // Insert on back of nonempty list
-//        cursor->next = nn;
-//    } else {
-//        p = nn; // List initially empty
+//    //  Check that we are not at the end of the list
+//    if (p)
+//        p->next = insert(p->next, n); // Add to rest of list
+//    else {   //  Insert new item
+//        p = malloc(sizeof *p);
+//        p->data = n;
+//        p->next = NULL;
 //    }
 //    return p;
 //}
+
+// Inserts new element n onto the back of the list
+// to which p points. Uses iteration instead of recursion.
+Node *insert(Node *p, int n) {
+    // Make the new node
+    Node *nn = malloc(sizeof *nn);
+    nn->data = n;
+    nn->next = NULL;
+    // Find the last element in the list
+    struct node *cursor = p; 
+    while (cursor && cursor->next) 
+        cursor = cursor->next;
+    if (cursor) {   // Insert on back of nonempty list
+        cursor->next = nn;
+    } else {
+        p = nn; // List initially empty
+    }
+    return p;
+}
 
 // Deallocates the memory held by the list to which
 // p points.
@@ -53,7 +54,7 @@ void dispose_list(Node *p) {
 // Prints the elements in the list to which p points.
 void print_list(const Node *p) {
     while (p) {
-        printf("-> (%d   %p)", p->data, p->next);
+        printf("-> (%d   %zu)", p->data, (uintptr_t)p->next);
         p = p->next;
     }
     printf("\n");
@@ -66,7 +67,7 @@ int main() {
     p->data = 4;
     p->next = NULL;
     print_list(p);
-    printf("%d   %p\n", p->data, p->next);
+    printf("%d   %lu\n", p->data, (uintptr_t)(p->next));
     dispose_list(p);
 
     printf("------------------------------------\n");
@@ -88,5 +89,5 @@ int main() {
     ////print_list(p);
     //dispose_list(p);
 
-    puts("Program execution complete>");
+    puts("Program execution complete");
 }
