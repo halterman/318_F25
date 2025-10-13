@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "treenode.h"
+#include "treeprinter.h"
 
 // Creates a new tree node with
 // no childern
@@ -24,7 +25,7 @@ Node *random_tree(int max_height, int max_value) {
     return root;
 }
 
-static void draw_tree_helper(const Node *t, char link, int depth) {
+void draw_tree_helper(const Node *t, char link, int depth) {
     if (t) {
         draw_tree_helper(t->right, '/', depth + 5);
         for (int i = 0; i < depth; i++)
@@ -36,18 +37,19 @@ static void draw_tree_helper(const Node *t, char link, int depth) {
 
 // Draw thes tree using ASCII text
 void draw_tree(const Node *t) {
-    draw_tree_helper(t, '-', 0);
+    //draw_tree_helper(t, '-', 0);
+    print_tree(t);
 }
 
 // Returns the number of nodes in the tree
 int size(const Node *t) {
     if (t) 
-        return size(t->left) + 1 + size(t->right);
+        return 1 + size(t->left) + size(t->right);
     else
         return 0;
 }
 
-// Deallocates the memory held by all the nodes in a tree
+// Deallocates the space held by the nodes in a tree
 void dispose_tree(Node *t) {
     if (t) {
         dispose_tree(t->left);
@@ -55,3 +57,5 @@ void dispose_tree(Node *t) {
         free(t);
     }
 }
+
+

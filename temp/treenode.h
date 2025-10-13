@@ -22,7 +22,8 @@ void draw_tree(const Node *t);
 // Returns the number of nodes in the tree
 int size(const Node *t);
 
-// Deallocates the memory held by all the nodes in a tree
+// Deallocates the space held by the nodes in a tree
 void dispose_tree(Node *t);
+
 
 #endif
